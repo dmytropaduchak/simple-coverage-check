@@ -1,0 +1,26 @@
+name: Simple Coverage Check
+description: Warn when test coverage drops versus the PR base branch summary.
+author: Dmytro Paduchak
+branding:
+  icon: percent
+  color: green
+inputs:
+  github-token:
+    description: Token to read base coverage file and post PR comments.
+    required: false
+    default: ${{ github.token }}
+  fail-on:
+    description: "none = report only; medium or high = fail when findings match."
+    required: false
+    default: none
+  coverage-path:
+    description: Path to coverage-summary.json (Istanbul) or lcov.info.
+    required: false
+    default: coverage/coverage-summary.json
+  max-drop:
+    description: Max allowed percentage-point drop in lines coverage.
+    required: false
+    default: "1"
+runs:
+  using: node20
+  main: dist/index.js
